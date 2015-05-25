@@ -1,4 +1,5 @@
 from __future__ import absolute_import, unicode_literals
+from os.path import join, dirname, realpath
 
 ######################
 # CARTRIDGE SETTINGS #
@@ -160,6 +161,10 @@ ADMINS = (
 )
 MANAGERS = ADMINS
 
+BASE_DIR = dirname(realpath(__file__))
+
+FIXTURE_DIRS = (join(BASE_DIR, 'fixtures/'),)
+
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
@@ -318,7 +323,8 @@ INSTALLED_APPS = (
     "mezzanine.galleries",
     "mezzanine.twitter",
 
-    'rest_framework',
+    "south",
+    "rest_framework",
 
     "delivery",
     #"mezzanine.accounts",
