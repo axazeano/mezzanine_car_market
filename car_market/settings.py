@@ -42,7 +42,7 @@ from os.path import join, dirname, realpath
 # is called once an order is successful and all of the order
 # object's data has been created. This is where any custom order
 # processing should be implemented.
-# SHOP_HANDLER_ORDER = "cartridge.shop.checkout.default_order_handler"
+SHOP_HANDLER_ORDER = "delivery.test.OrderHandler"
 
 # Dotted package path and class name of the function that
 # is called on submit of the payment checkout step. This is where
@@ -147,7 +147,7 @@ from os.path import join, dirname, realpath
 # If True, the south application will be automatically added to the
 # INSTALLED_APPS setting.
 USE_SOUTH = True
-
+AUTH_PROFILE_MODULE = "delivery.UserProfile"
 
 ########################
 # MAIN DJANGO SETTINGS #
@@ -323,11 +323,11 @@ INSTALLED_APPS = (
     "mezzanine.galleries",
     "mezzanine.twitter",
 
-    "south",
     "rest_framework",
+    "rest_framework.authtoken",
 
     "delivery",
-    #"mezzanine.accounts",
+    "mezzanine.accounts",
     #"mezzanine.mobile",
 )
 

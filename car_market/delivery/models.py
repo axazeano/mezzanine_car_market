@@ -8,7 +8,7 @@ from cartridge.shop.models import Product
 
 __author__ = 'vladimir'
 
-class ShippingProvider(Displayable, models.Model):
+class ShippingProvider(models.Model):
     """
     Credential of provider
     Dealer registering in system as user
@@ -22,6 +22,7 @@ class ShippingProvider(Displayable, models.Model):
     """
     provider = models.ForeignKey(User, related_name='provider')
     name = models.CharField(max_length=200)
+    provider_url = models.CharField(max_length=200)
     token_paraphrase = models.CharField(max_length=200, blank=True, null=True, default='')
     token = models.CharField(max_length=200, blank=True, null=True, default='')
     token_last_update_date = models.DateTimeField(default=now)
@@ -38,9 +39,63 @@ class ShippingProvider(Displayable, models.Model):
         self.token_paraphrase = ''
         super(ShippingProvider, self).save(*args, **kwargs)
 
-    @models.permalink
-    def get_absolute_url(self):
-        return ("shipping_provider", (), {"slug": self.slug})
+
+class DeliveryStatus(models.Model):
+    status = models.CharField(max_length=120, unique=True)
+    description = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.status
 
 
+class Delivery(models.Model):
+    """
+    Deliveries model.
+    provider : dealer, which delivered products to shop
+    delivery_dealer_id : delivery has uid on dealer's side
+    delivery_status : status of delivery
+    product : which product should be delivered to shop
+    product_count : how many product should be in delivery
+    delivery_cost : cost of delivery
+    """
+    provider = models.ForeignKey(User)
+    dealer_delivery_id = models.IntegerField(_("UID on dealer side"))
+    delivery_status = models.ForeignKey(DeliveryStatus)
+    product = models.ForeignKey(Product)
+    product_count = models.FloatField()
+    cost = models.FloatField()
+    date = models.DateField(default=now)
 
+    class Meta:
+        verbose_name = _('Delivery')
+        verbose_name_plural = _('Deliveries')
+
+
+class DeliveryAction(models.Model):
+    action = models.CharField(max_length=120)
+    description = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.action
+
+    class Meta:
+        verbose_name = _("Delivery action")
+        verbose_name_plural = _("Delivery actions")
+
+
+class DeliveryAudit(models.Model):
+    delivery = models.ForeignKey(Delivery)
+    delivery_action = models.ForeignKey(DeliveryAction)
+    action_date = models.DateTimeField(default=now)
+    action_create_by = models.ForeignKey(User)
+    action_description = models.CharField(max_length=300)
+
+    class Meta:
+        verbose_name = _("Delivery audit")
+        verbose_name_plural = _("Delivery audits")
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField("auth.User")
+    date_of_birth = models.DateField()
+    bio = models.TextField()

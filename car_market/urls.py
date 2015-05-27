@@ -5,7 +5,11 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 
 from mezzanine.core.views import direct_to_template
+from rest_framework.authtoken.views import obtain_auth_token
 
+from rest_framework.routers import DefaultRouter
+from car_market import delivery
+from delivery import views, urls as delivery_urls
 
 admin.autodiscover()
 
@@ -18,6 +22,11 @@ urlpatterns = i18n_patterns("",
     # admin interface, which would be marginally more secure.
     ("^admin/", include(admin.site.urls)),
 )
+
+urlpatterns += patterns('',
+                        url(r'^api/token/', obtain_auth_token, name='api-token'),
+                        url(r'^api/', include(delivery_urls))
+                        )
 
 urlpatterns += patterns('',
 

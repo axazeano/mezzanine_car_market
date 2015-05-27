@@ -1,0 +1,50 @@
+[
+  {
+    "model": "delivery.deliverystatus",
+    "pk": 1,
+    "fields": {
+      "status": "Delivery created",
+      "description": "Delivery created"
+    }
+  },
+  {
+    "model": "delivery.deliverystatus",
+    "pk": 2,
+    "fields": {
+      "status": "Wait on fabric",
+      "description": "Delivery waits fabric side"
+    }
+  },
+  {
+    "model": "delivery.deliverystatus",
+    "pk": 3,
+    "fields": {
+      "status": "Rejected by fabric",
+      "description": "Delivery was rejected by fabric side"
+    }
+  },
+  {
+    "model": "delivery.deliverystatus",
+    "pk": 4,
+    "fields": {
+      "status": "Rejected by dealer",
+      "description": "Delivery was rejected by dealer side"
+    }
+  },
+  {
+    "model": "delivery.deliverystatus",
+    "pk": 5,
+    "fields": {
+      "status": "Rejected by shop",
+      "description": "Delivery was rejected by shop side"
+    }
+  },
+  {
+    "model": "delivery.deliverystatus",
+    "pk": 6,
+    "fields": {
+      "status": "Delivery completed",
+      "description": "Delivery completed"
+    }
+  }
+]

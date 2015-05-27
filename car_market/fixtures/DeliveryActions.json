@@ -1,0 +1,42 @@
+[
+  {
+    "model": "delivery.deliveryaction",
+    "pk": 1,
+    "fields": {
+      "action": "Create",
+      "description": "Create delivery"
+    }
+  },
+  {
+    "model": "delivery.deliveryaction",
+    "pk": 2,
+    "fields": {
+      "action": "Change status",
+      "description": "Change status of delivery"
+    }
+  },
+  {
+    "model": "delivery.deliveryaction",
+    "pk": 3,
+    "fields": {
+      "action": "Change count",
+      "description": "Change count of produvtion in delivery"
+    }
+  },
+  {
+    "model": "delivery.deliveryaction",
+    "pk": 4,
+    "fields": {
+      "action": "Change cost",
+      "description": "Change cost of delivery"
+    }
+  },
+  {
+    "model": "delivery.deliveryaction",
+    "pk": 5,
+    "fields": {
+      "action": "Change date",
+      "description": "Change date of delivery"
+    }
+  }
+]
